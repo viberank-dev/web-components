@@ -1,0 +1,218 @@
+/* Slot Machine Card Base Styles */
+.slot-machine-card {
+  position: relative;
+  border-radius: 1rem;
+  overflow: visible;
+  transition: box-shadow 0.3s, filter 0.3s, transform 0.3s;
+  background: white;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.slot-machine-card.slot-loading,
+.slot-machine-card.slot-empty {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f9fafb;
+  color: #6b7280;
+}
+
+.slot-machine-card.slot-loading .loading-placeholder {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Slot Content */
+.slot-content {
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.slot-content.clickable {
+  cursor: pointer;
+}
+
+.slot-content.clickable:hover {
+  transform: translateY(-2px);
+}
+
+/* Default App Card Styles */
+.default-app-card {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  gap: 12px;
+}
+
+.app-logo {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.app-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.app-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 4px 0;
+  line-height: 1.2;
+}
+
+.app-description {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Animation States */
+.slot-outer {
+  position: relative;
+  border-radius: 1rem;
+  overflow: visible;
+  transition: box-shadow 0.3s, filter 0.3s, transform 0.3s;
+}
+
+.slot-spinning {
+  animation: slot-shake 0.5s infinite cubic-bezier(.36,.07,.19,.97);
+  box-shadow: 0 0 24px 4px #14b8a6, 0 0 0 4px #14b8a633;
+  filter: blur(1px) brightness(1.1) saturate(1.2);
+  z-index: 2;
+}
+
+.slot-landed {
+  animation: slot-landed-fadein 0.5s;
+  box-shadow: 0 0 32px 8px #14b8a6cc, 0 0 0 4px #14b8a655;
+  filter: none;
+}
+
+/* Shaking animation during spin */
+@keyframes slot-shake {
+  0% { transform: translateX(0) scale(1.01); }
+  10% { transform: translateX(-2px) scale(1.02); }
+  20% { transform: translateX(2px) scale(1.03); }
+  30% { transform: translateX(-4px) scale(1.04); }
+  40% { transform: translateX(4px) scale(1.05); }
+  50% { transform: translateX(-2px) scale(1.04); }
+  60% { transform: translateX(2px) scale(1.03); }
+  70% { transform: translateX(-1px) scale(1.02); }
+  80% { transform: translateX(1px) scale(1.01); }
+  90% { transform: translateX(0) scale(1.01); }
+  100% { transform: translateX(0) scale(1); }
+}
+
+/* Fade-in animation when landing */
+@keyframes slot-landed-fadein {
+  0% { opacity: 0; filter: blur(4px); }
+  100% { opacity: 1; filter: none; }
+}
+
+/* Glowing effect overlay */
+.slot-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem;
+  pointer-events: none;
+  box-shadow: 0 0 32px 8px #14b8a6cc, 0 0 0 4px #14b8a655;
+  z-index: 3;
+  opacity: 0.7;
+  animation: slot-glow-pulse 1s infinite alternate;
+}
+
+@keyframes slot-glow-pulse {
+  0% { opacity: 0.5; }
+  100% { opacity: 0.9; }
+}
+
+/* Moving pattern overlay */
+.slot-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem;
+  pointer-events: none;
+  z-index: 4;
+  background: repeating-linear-gradient(135deg, #14b8a6 0 2px, transparent 2px 12px);
+  opacity: 0.15;
+  animation: slot-overlay-move 0.7s linear infinite;
+}
+
+@keyframes slot-overlay-move {
+  0% { background-position: 0 0; }
+  100% { background-position: 40px 40px; }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .slot-machine-card {
+    background: #1f2937;
+    border-color: #374151;
+    color: white;
+  }
+
+  .slot-machine-card.slot-loading,
+  .slot-machine-card.slot-empty {
+    background: #111827;
+    color: #9ca3af;
+  }
+
+  .app-logo {
+    background: #374151;
+  }
+
+  .app-name {
+    color: #f9fafb;
+  }
+
+  .app-description {
+    color: #d1d5db;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .default-app-card {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .app-logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .app-name {
+    font-size: 14px;
+  }
+
+  .app-description {
+    font-size: 12px;
+  }
+} 
