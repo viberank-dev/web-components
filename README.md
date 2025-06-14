@@ -151,20 +151,14 @@ Customize the appearance of components to match your brand:
 
 ```
 web-components/
-├── src/
-│   ├── components/
-│   │   ├── BattleModal/
-│   │   │   ├── BattleModal.tsx
-│   │   │   ├── BattleModal.css
-│   │   │   └── index.ts
-│   │   ├── VotingButtons/
-│   │   └── SlotMachineCard/
-│   ├── hooks/
-│   ├── utils/
-│   └── types/
-├── examples/
-├── docs/
-└── tests/
+├── component-category/
+│   ├── ComponentA.tsx
+│   ├── ComponentA.css
+│   ├── ComponentB.tsx
+│   ├── ComponentB.css
+│   ├── Example.tsx
+│   └── index.ts
+└── README.md
 ```
 
 ### Testing
